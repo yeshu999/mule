@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xml-module="http://www.mulesoft.org/schema/mule/xml-module" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/xml-module http://www.mulesoft.org/schema/mule/xml-module/current/mule-xml-module.xsd">
+	<xml-module:config name="XML_Config" doc:name="XML Config" doc:id="fd44c7f0-7da1-4e77-9ef1-071a1c888f25" />
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="6e843ff7-c77d-49ca-b734-61d4ce6882ba" >
+		<http:listener-connection host="0.0.0.0" port="8084" />
+	</http:listener-config>
+	<flow name="my_first_apiFlow" doc:id="afeab281-9a06-4e78-90fe-1edd337bf3b2" >
+		<http:listener doc:name="Listener" doc:id="43a17a1f-abe7-4b0e-a6e1-7e96c9b17ae8" path="/process" config-ref="HTTP_Listener_config1"/>
+		<xml-module:validate-schema doc:name="Validate schema" doc:id="ff9c4a37-11a8-4568-ae45-8be6da886a18" config-ref="XML_Config" schemas="schema.xsd"/>
+		<logger level="INFO" doc:name="Logger" doc:id="c2ca8a9c-aa06-40de-9a74-52b62382228c" message="Incoming person data is valid"/>
+	</flow>
+</mule>
